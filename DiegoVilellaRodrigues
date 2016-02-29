@@ -58,3 +58,277 @@ public class MainBiblioteca {
         }
     }
 }
+
+/**
+ * @(#)Leitura.java
+ *
+ *
+ * @author Diego Vilella Rodrigues - UTFPR - Campus Cornélio Procópio
+ * @version 1.00 2016/2/29
+ */
+ 
+import java.io.*;
+
+public class Leitura {
+	
+	public String lerString(){
+		InputStreamReader isr = new InputStreamReader(System.in);
+		BufferedReader input = new BufferedReader(isr);
+		String aux = "";
+		try {
+			aux = input.readLine();
+		} catch(IOException erro) {
+			System.out.println("Deu erro.");
+		}
+		return aux;
+		}
+		public int lerInt() {
+			return Integer.parseInt(lerString());
+		}
+		public double lerDouble() {
+			return Double.parseDouble(lerString());
+		}
+		public float lerFloat() {
+			return Float.parseFloat(lerString());
+		}
+}
+
+/**
+ * @(#)Biblioteca.java
+ *
+ *
+ * @author Diego Vilella Rodrigues - UTFPR - Campus Cornélio Procópio
+ * @version 1.00 2016/2/29
+ */
+ 
+ /*
+ a biblioteca de uma universidade deseja fazer um algoritmo que leia nome do livro que será emprestado, o 
+ tipo de usuário (professor ou aluno) e possa imprimir na tela um recibo. 
+ considerar que o professor tem 10 dias para devolver o livro o aluno somente 3 dias.
+  **/
+  
+import java.util.*;
+
+public class Biblioteca {
+	private String nomeDoLivro;
+	private Calendar vencimento = Calendar.getInstance();
+	Leitura input = new Leitura();
+	
+
+    public Biblioteca() {
+    }
+    
+    public String getNomeDoLivro() {
+    	return this.nomeDoLivro;
+    }
+    
+    public void setNomeDoLivro() {
+    	System.out.print("Digite o nome do livro: ");
+    	String nome = input.lerString();
+    	this.nomeDoLivro = nome;
+    }
+    public void setNomeDoLivro(String nome) {
+    	this.nomeDoLivro = nome;
+    }
+    
+    public Date getVencimento() {
+    	return this.vencimento.getTime();
+    }
+    
+    public void setVencimento(Calendar vencimento) {
+    	this.vencimento = vencimento;
+    }
+    
+    public String toString(){
+    	return "Nome do livro: " + this.nomeDoLivro + "\nVencimento: " + this.vencimento.getTime();
+    }
+    
+}
+/**
+ * @(#)Pessoa.java
+ *
+ *
+ * @author Diego Vilella Rodrigues - UTFPR - Campus Cornélio Procópio
+ * @version 1.00 2016/2/29
+ */
+
+public class Pessoa {
+	private String nome;
+	private int ra;
+	Leitura input = new Leitura();
+
+    public Pessoa() {
+    }
+    
+    public Pessoa(String nome, int ra) {
+    	this.nome = nome;
+    	this.ra = ra;
+    }
+    
+     public String getNome() {
+    	return this.nome;
+    }
+    
+    public void setNome() {
+    	System.out.printf("Digite o nome: ");
+    	String nome = input.lerString();
+    	this.nome = nome;
+    }
+    
+    public void setNome(String nome) {
+    	this.nome = nome;
+    }
+    
+    public int getRa() {
+    	return this.ra;
+    }
+    
+    public void setRa() {
+    	System.out.printf("Digite o registro: ");
+    	try {
+    		int ra = input.lerInt();
+    		this.ra = ra;
+    	} catch (NumberFormatException erro) {
+    		System.out.printf("RA invalido");
+    	}
+    }
+    
+    public void setRa(int ra) {
+    	this.ra = ra;
+    }
+    
+    public String toString() {
+    	return "Nome: " + this.nome + "\nRegistro Academico: " + ra;
+    }
+    
+    
+    
+}
+
+/**
+ * @(#)Professor.java
+ *
+ *
+ * @author Diego Vilella Rodrigues - UTFPR - Campus Cornélio Procópio
+ * @version 1.00 2016/2/29
+ */
+
+ /*
+ a biblioteca de uma universidade deseja fazer um algoritmo que leia nome do livro que será emprestado, o 
+ tipo de usuário (professor ou aluno) e possa imprimir na tela um recibo. 
+ considerar que o professor tem 10 dias para devolver o livro o aluno somente 3 dias.
+  **/
+
+public class Professor extends Pessoa {
+	private String departamento;
+
+    public Professor() {
+    }
+    
+    public Professor(String nome, int ra, String departamento) {
+    	super(nome, ra);
+    	this.departamento = departamento;
+    }
+    public String getDepart() {
+    	return this.departamento;
+    }
+    
+    public void setDepart() {
+    	System.out.printf("Digite o departamento: ");
+    	String departamento = input.lerString();
+    	this.departamento = departamento;
+    }
+    
+    public void setDepart(String departamento) {
+    	this.departamento = departamento;
+    }
+    	
+    public String toString() { 
+    	return super.toString() + "\nDepartamento: " + this.departamento;
+    }
+    
+    
+    
+}
+
+/**
+ * @(#)Aluno.java
+ *
+ *
+ * @author Diego Vilella Rodrigues - UTFPR - Campus Cornélio Procópio
+ * @version 1.00 2016/2/29
+ */
+ 
+  /*
+ a biblioteca de uma universidade deseja fazer um algoritmo que leia nome do livro que será emprestado, o 
+ tipo de usuário (professor ou aluno) e possa imprimir na tela um recibo. 
+ considerar que o professor tem 10 dias para devolver o livro o aluno somente 3 dias.
+  **/
+
+
+public class Aluno extends Pessoa{
+	private String nome;
+	private int ra;
+	
+    public Aluno() {
+    }
+    
+    public Aluno(String nome, int ra) {
+    	super(nome, ra);
+    }
+    
+    public String toString() {
+    	return super.toString();
+    }
+    
+    
+}
+
+/**
+ * @(#)Teste.java
+ *
+ *
+ * @author Diego Vilella Rodrigues - UTFPR - Campus Cornélio Procópio
+ * @version 1.00 2016/2/29
+ */
+
+public class Teste {
+    public static void main(String[] args) {
+        Leitura input = new Leitura();
+    	Biblioteca b1 = new Biblioteca();
+    	Professor p1 = new Professor();
+    	Aluno a1 = new Aluno();
+    	
+    	/*
+    	 * Teste realizado para testar alguns metodos Clase Biblioteca.
+    	 **/
+    	b1.setNomeDoLivro("Informatica"); 
+        System.out.println(b1.getNomeDoLivro()); 
+        b1.setNomeDoLivro("Pequeno Principe");
+        System.out.println(b1.getNomeDoLivro());	
+        System.out.println(b1.getVencimento());
+        System.out.println(b1);
+        
+    	/*
+    	 * Teste realizado para testar alguns metodos Clase Professor.
+    	 **/
+        p1.setDepart("DACOMP");
+        p1.setNome("Francisco");
+        p1.setRa(372624726);
+        System.out.println(p1.getDepart());
+        System.out.println(p1.getNome());
+        System.out.println(p1.getRa());
+        System.out.println(p1);
+        
+        /*
+    	 * Teste realizado para testar alguns metodos Clase Aluno.
+    	 **/
+        
+        a1.setNome("Diego");
+        a1.setRa(34346);
+        System.out.println(a1.getNome());
+        System.out.println(a1.getRa());
+        System.out.println(a1);
+    }
+}
+
