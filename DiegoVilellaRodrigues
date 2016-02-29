@@ -1,0 +1,60 @@
+/**
+ * @(#)MainBiblioteca.java
+ *
+ *
+ * @author Diego Vilella Rodrigues - UTFPR - Campus Cornélio Procópio
+ * @version 1.00 2016/2/29
+ */
+ 
+  /*
+ a biblioteca de uma universidade deseja fazer um algoritmo que leia nome do livro que será emprestado, o 
+ tipo de usuário (professor ou aluno) e possa imprimir na tela um recibo. 
+ considerar que o professor tem 10 dias para devolver o livro o aluno somente 3 dias.
+  **/
+
+import java.util.*;
+
+public class MainBiblioteca {
+    public static void main(String[] args) {
+    	Leitura input = new Leitura();
+    	Biblioteca b1 = new Biblioteca();
+    	Professor p1 = new Professor();
+    	Aluno a1 = new Aluno();
+    	Calendar vencimento = Calendar.getInstance();
+    	
+        
+        System.out.println("Deseja cadastrar livro ? s (sim) ou qualquer outra tecla para(não, sair !)");
+        String op = input.lerString();
+        if(op.compareTo("s") == 0 || op.compareTo("S") == 0) {
+        	b1.setNomeDoLivro();
+        	System.out.print("Professor (P) ou Aluno (A): ");
+        	op = input.lerString();
+        	if((op.compareTo("P") == 0) || (op.compareTo("p") == 0)) {
+        		System.out.println("Digite os dados do professor:");
+        		p1.setNome();
+        		p1.setDepart();
+        		p1.setRa();
+        		vencimento.add(Calendar.DATE, 10);
+        		b1.setVencimento(vencimento);
+        		System.out.println("\nRECIBO\n");
+        		System.out.println(b1);
+        		System.out.println(p1);
+        	} else if ((op.compareTo("A") == 0 )|| (op.compareTo("a") == 0 )) {
+        		System.out.println("Digite os dados do aluno:");
+        		a1.setNome();
+        		a1.setRa();
+        		vencimento.add(Calendar.DATE, 3);
+        		b1.setVencimento(vencimento);
+        		System.out.println("\nRECIBO\n");
+        		System.out.println(b1);
+        		System.out.println(a1);
+        	} else {
+        		System.out.print("valor invalido, volte ao menu inicial..."); // ps.: também poderia automaticamente usando laço while ficar voltando ao menu.
+        		System.exit(0);
+        	}
+        } else {
+        	System.out.print("Bye");
+        	System.exit(0);
+        }
+    }
+}
